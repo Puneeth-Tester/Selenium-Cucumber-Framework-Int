@@ -1,0 +1,7 @@
+open CMD prompt and then execute below command --> sequential order
+mvn exec:java -Dexec.classpathScope=test -Dexec.mainClass=io.cucumber.core.cli.Main -Dexec.args="src/test/resources/awesomecucumber --glue awesomecucumber"
+
+Parallel Execution:
+Step 1: Comment the build attribute in pom.xml
+Step 2: Open CMD prompt
+Step 3: mvn exec:java -Dexec.classpathScope=test -Dexec.mainClass=io.cucumber.core.cli.Main -Dexec.args="src/test/resources/awesomecucumber --glue awesomecucumber --threads 3"

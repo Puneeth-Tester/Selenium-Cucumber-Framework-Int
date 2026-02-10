@@ -17,6 +17,9 @@ public class StorePage extends BasePage {
     @FindBy(css = "a[title='View cart']")
     private WebElement viewCartLink;
 
+    @FindBy(xpath = "//h1[normalize-space()='Store']")
+    private WebElement titleTxt;
+
     public void addToCart(String productName) {
 
         // Using the below code while running through JUnit runner
@@ -26,6 +29,7 @@ public class StorePage extends BasePage {
         By addToCartBtn = By.cssSelector(utf8Encoded);*/
 
         By addToCartBtn = By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
+        wait.until(ExpectedConditions.visibilityOf(titleTxt));
         wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
         wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
     }
