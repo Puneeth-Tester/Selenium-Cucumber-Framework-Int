@@ -1,0 +1,8 @@
+# executes on firefox browser
+mvn clean test -Dbrowser=firefox
+
+# executes on default browser --> chrome
+mvn clean test
+
+# executes on chrome browser
+mvn clean test -Dbrowser=chrome

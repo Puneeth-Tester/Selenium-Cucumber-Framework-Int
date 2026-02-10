@@ -1,11 +1,12 @@
 package awesomecucumber.pages;
 
 import awesomecucumber.domainobjects.BillingDetails;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 public class CheckoutPage extends BasePage{
 
@@ -24,6 +25,10 @@ public class CheckoutPage extends BasePage{
 
     @FindBy(id = "billing_state")
     private WebElement billingStateDropDown;
+
+    @FindBy(id = "select2-billing_state-container")
+    private WebElement alternateBillingStateDropDown;
+
     @FindBy(id = "billing_postcode")
     private WebElement billingZipFld;
     @FindBy(id = "billing_email")
@@ -32,6 +37,8 @@ public class CheckoutPage extends BasePage{
     private WebElement placeOrderBtn;
     @FindBy(css = ".woocommerce-notice")
     private WebElement noticeTxt;
+
+    private final By overlay = By.cssSelector(".blockUI.blockOverlay");
 
     public CheckoutPage enterBillingFirstName(String billingFirstName){
         WebElement e = wait.until(ExpectedConditions.visibilityOf(billingFirstnameFld));
@@ -62,8 +69,16 @@ public class CheckoutPage extends BasePage{
     }
 
     public CheckoutPage selectBillingState(String billingStateName){
-        Select sel = new Select(wait.until(ExpectedConditions.visibilityOf(billingStateDropDown)));
-        sel.selectByVisibleText(billingStateName);
+
+        // To execute on firefox browser
+        wait.until(ExpectedConditions.elementToBeClickable(alternateBillingStateDropDown)).click();
+        WebElement e = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[text()='" + billingStateName + "']")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", e);
+        e.click();
+
+        /*Select sel = new Select(wait.until(ExpectedConditions.visibilityOf(billingStateDropDown)));
+        sel.selectByVisibleText(billingStateName);*/
         return this;
     }
 
@@ -92,11 +107,12 @@ public class CheckoutPage extends BasePage{
     }
 
     public CheckoutPage placeOrder(){
-        try {
+        waitForOverlaysToDisappear(overlay);
+        /*try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         wait.until(ExpectedConditions.elementToBeClickable(placeOrderBtn)).click();
         return this;
     }
