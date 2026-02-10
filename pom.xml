@@ -36,4 +36,27 @@
             <version>4.39.0</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>dataproviderthreadcount</name>
+                            <value>3</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <!-- Uncomment the below lines to execute the feature files in parallel using JUnit runner-->
+                <!-- <configuration>
+                    <parallel>methods</parallel>
+                    <threadCount>3</threadCount>
+                </configuration>-->
+            </plugin>
+        </plugins>
+    </build>
 </project>

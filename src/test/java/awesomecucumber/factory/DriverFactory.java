@@ -6,9 +6,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
 
-    private static WebDriver driver;
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver initializeDriver(String browser){
+        WebDriver driver;
         switch (browser) {
             case "chrome" -> {
                 System.setProperty("webdriver.chrome.driver",
@@ -23,10 +24,11 @@ public class DriverFactory {
             default -> throw new IllegalStateException("INVALID BROWSER: " + browser);
         }
         driver.manage().window().maximize();
+        DriverFactory.driver.set(driver);
         return driver;
     }
 
     public static WebDriver getDriver(){
-        return driver;
+        return driver.get();
     }
 }
