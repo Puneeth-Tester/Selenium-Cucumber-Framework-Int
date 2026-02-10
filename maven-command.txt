@@ -1,3 +1,5 @@
+<<<<<<<<< CMD for Multiple Browsers >>>>>>>>>>
+
 # executes on firefox browser
 mvn clean test -Dbrowser=firefox
 
@@ -6,3 +8,15 @@ mvn clean test
 
 # executes on chrome browser
 mvn clean test -Dbrowser=chrome
+
+<<<<<<<<< CMD for Multiple Environments >>>>>>>>>>
+
+# picks up "PROD" env
+mvn clean test -Denv=PROD
+
+# picks up the default env --> "STAGE"
+mvn clean test
+
+# picks up "STAGE" env
+mvn clean test -Denv=STAGE
+

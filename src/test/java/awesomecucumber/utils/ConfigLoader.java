@@ -1,5 +1,7 @@
 package awesomecucumber.utils;
 
+import awesomecucumber.constants.EnvType;
+
 import java.util.Properties;
 
 public class ConfigLoader {
@@ -7,7 +9,12 @@ public class ConfigLoader {
     private static ConfigLoader configLoader;
 
     private ConfigLoader(){
-        properties = PropertyUtils.propertyLoader("src/test/resources/config.properties");
+        String env = System.getProperty("env", String.valueOf(EnvType.STAGE));
+        switch (EnvType.valueOf(env)){
+            case PROD -> properties = PropertyUtils.propertyLoader("src/test/resources/prod_config.properties");
+            case STAGE -> properties = PropertyUtils.propertyLoader("src/test/resources/stage_config.properties");
+            default -> throw new IllegalStateException("INVALID ENV: " + env);
+        }
     }
 
     public static ConfigLoader getInstance(){
