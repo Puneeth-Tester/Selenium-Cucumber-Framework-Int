@@ -1,5 +1,6 @@
 package awesomecucumber.factory;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,13 +13,15 @@ public class DriverFactory {
         WebDriver driver;
         switch (browser) {
             case "chrome" -> {
-                System.setProperty("webdriver.chrome.driver",
-                        "D:\\Study\\Selenium\\Selenium-Advanced-Framework\\src\\test\\resources\\executables\\chromedriver.exe");
+                /*System.setProperty("webdriver.chrome.driver",
+                        "D:\\Study\\Selenium\\Selenium-Advanced-Framework\\src\\test\\resources\\executables\\chromedriver.exe");*/
+                WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
             }
             case "firefox" -> {
-                System.setProperty("webdriver.gecko.driver",
-                        "D:\\Study\\Selenium\\Selenium-Advanced-Framework\\src\\test\\resources\\executables\\geckodriver.exe");
+                /*System.setProperty("webdriver.gecko.driver",
+                        "D:\\Study\\Selenium\\Selenium-Advanced-Framework\\src\\test\\resources\\executables\\geckodriver.exe");*/
+                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             }
             default -> throw new IllegalStateException("INVALID BROWSER: " + browser);
