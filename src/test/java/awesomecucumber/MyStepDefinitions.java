@@ -19,16 +19,15 @@ import org.testng.Assert;
 
 public class MyStepDefinitions {
 
-    private WebDriver driver;
+    private final WebDriver driver;
     private BillingDetails billingDetails;
 
     public MyStepDefinitions(TestContext context){
-        System.out.println("STEP DEF: DI: SCENARIO NAME: " + context.scenarioName);
+        driver = context.driver;
     }
 
     @Given("I'm on the Store Page")
     public void i_m_on_the_store_page() {
-        driver = DriverFactory.getDriver();
         new StorePage(driver).load(EndPoint.STORE.url);
     }
 
@@ -46,7 +45,6 @@ public class MyStepDefinitions {
 
     @Given("I'm a guest customer")
     public void iMAGuestCustomer() {
-        driver = DriverFactory.getDriver();
         new StorePage(driver).load(MyConstants.STORE);
     }
 
