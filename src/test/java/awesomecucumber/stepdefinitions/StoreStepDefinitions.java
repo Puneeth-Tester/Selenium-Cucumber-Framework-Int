@@ -1,5 +1,6 @@
 package awesomecucumber.stepdefinitions;
 
+import awesomecucumber.apis.CartApi;
 import awesomecucumber.constants.EndPoint;
 import awesomecucumber.context.TestContext;
 import awesomecucumber.domainobjects.Product;
@@ -8,7 +9,6 @@ import awesomecucumber.pages.StorePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
 
 public class StoreStepDefinitions {
 
@@ -32,7 +32,11 @@ public class StoreStepDefinitions {
 
     @And("I have a product in the cart")
     public void iHaveAProductInTheCart() {
-        storePage.addToCart("Blue Shoes");
+        // storePage.addToCart("Blue Shoes");
+        CartApi cartApi = new CartApi(context.cookies.getCookies());
+        cartApi.addToCart(1215, 1);
+        context.cookies.setCookies(cartApi.getCookies());
+        context.cookies.injectCookiesToBrowser(context.driver);
     }
 
 }

@@ -1,5 +1,6 @@
 package awesomecucumber.stepdefinitions;
 
+import awesomecucumber.constants.EndPoint;
 import awesomecucumber.context.TestContext;
 import awesomecucumber.pages.CheckoutPage;
 import awesomecucumber.pages.PageFactoryManager;
@@ -32,5 +33,10 @@ public class CheckoutStepDefinitions {
     public void theOrderShouldBePlacedSuccessfully() {
         Assert.assertEquals(checkoutPage.getNotice(),
                 "Thank you. Your order has been received.");
+    }
+
+    @And("I'm on the Checkout page")
+    public void iMOnTheCheckoutPage() {
+        checkoutPage.load(EndPoint.CHECKOUT.url);
     }
 }

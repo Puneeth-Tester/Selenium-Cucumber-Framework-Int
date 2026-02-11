@@ -4,7 +4,6 @@ import awesomecucumber.context.TestContext;
 import awesomecucumber.domainobjects.Product;
 import awesomecucumber.pages.CartPage;
 import awesomecucumber.pages.PageFactoryManager;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 
@@ -21,10 +20,4 @@ public class CartStepDefinitions {
         Assert.assertEquals(cartPage.getProductName(), product.getName());
         Assert.assertEquals(cartPage.getProductQuantity(), quantity);
     }
-
-    @And("I'm on the Checkout page")
-    public void iMOnTheCheckoutPage() {
-        cartPage.checkout();
-    }
-
 }
