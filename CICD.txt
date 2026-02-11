@@ -1,0 +1,13 @@
+Windows: Install and Configure Jenkins
+
+Download site:
+https://www.jenkins.io/download/
+
+Open CMD Prompt:
+D:\Study\Jenkins\JenkinsServer
+
+To start Jenkins Server:
+java -jar jenkins.war --httpPort=9090
+
+Open browser:
+http://localhost:9090

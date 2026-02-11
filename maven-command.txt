@@ -21,3 +21,11 @@ mvn clean test
 mvn clean test -Denv=STAGE
 
 mvn clean test
+
+<<<<<<<<<<<<<<<< >>>>>>>>>>>>>>>>
+
+mvn clean test -Denv=STAGE -Dbrowser=chrome -Dcucumber.filter.tags=@smoke
+
+mvn exec:java -Dexec.classpathScope=test -Dexec.mainClass=io.cucumber.core.cli.Main -Dcucumber.filter.tags=@smoke
+mvn exec:java -Dexec.classpathScope=test -Dexec.mainClass=io.cucumber.core.cli.Main -Dexec.args="--tags @smoke"
+mvn exec:java -Dexec.classpathScope=test -Dexec.mainClass=io.cucumber.core.cli.Main -Dexec.args="--tags @smoke --threads 2"
