@@ -3,6 +3,7 @@ package awesomecucumber.stepdefinitions;
 import awesomecucumber.constants.EndPoint;
 import awesomecucumber.context.TestContext;
 import awesomecucumber.domainobjects.Product;
+import awesomecucumber.pages.PageFactoryManager;
 import awesomecucumber.pages.StorePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -11,25 +12,27 @@ import org.openqa.selenium.WebDriver;
 
 public class StoreStepDefinitions {
 
-    private final WebDriver driver;
+    private final StorePage storePage;
+    private final TestContext context;
 
     public StoreStepDefinitions(TestContext context){
-        driver = context.driver;
+        this.context = context;
+        storePage = PageFactoryManager.getStorePage(context.driver);
     }
 
     @Given("I'm on the Store Page")
     public void i_m_on_the_store_page() {
-        new StorePage(driver).load(EndPoint.STORE.url);
+        storePage.load(EndPoint.STORE.url);
     }
 
     @When("I add a {product} to the cart")
     public void i_add_a_to_the_cart(Product product) {
-        new StorePage(driver).addToCart(product.getName());
+        storePage.addToCart(product.getName());
     }
 
     @And("I have a product in the cart")
     public void iHaveAProductInTheCart() {
-        new StorePage(driver).addToCart("Blue Shoes");
+        storePage.addToCart("Blue Shoes");
     }
 
 }
