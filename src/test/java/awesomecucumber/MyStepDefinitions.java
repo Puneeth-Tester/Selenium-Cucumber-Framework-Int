@@ -2,6 +2,7 @@ package awesomecucumber;
 
 import awesomecucumber.constants.EndPoint;
 import awesomecucumber.constants.MyConstants;
+import awesomecucumber.context.TestContext;
 import awesomecucumber.domainobjects.BillingDetails;
 import awesomecucumber.domainobjects.Product;
 import awesomecucumber.factory.DriverFactory;
@@ -20,6 +21,10 @@ public class MyStepDefinitions {
 
     private WebDriver driver;
     private BillingDetails billingDetails;
+
+    public MyStepDefinitions(TestContext context){
+        System.out.println("STEP DEF: DI: SCENARIO NAME: " + context.scenarioName);
+    }
 
     @Given("I'm on the Store Page")
     public void i_m_on_the_store_page() {
